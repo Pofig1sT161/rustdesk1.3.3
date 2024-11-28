@@ -1149,7 +1149,7 @@ jobs:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ./signed-apk
+            ${{steps.sign-rustdesk.outputs.signedReleaseFile}}
 
       - name: Publish unsigned apk package
         if: env.UPLOAD_ARTIFACT == 'true'
@@ -1158,7 +1158,7 @@ jobs:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ./signed-apk
+            ${{steps.sign-rustdesk.outputs.signedReleaseFile}}
 
   build-rustdesk-android-universal:
     needs: [build-rustdesk-android]
@@ -1338,7 +1338,7 @@ jobs:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
-            ./signed-apk
+            ${{steps.sign-rustdesk.outputs.signedReleaseFile}}
 
       - name: Publish unsigned apk package
         if: env.ANDROID_SIGNING_KEY == null && env.UPLOAD_ARTIFACT == 'true'
